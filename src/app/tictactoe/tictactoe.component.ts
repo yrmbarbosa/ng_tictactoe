@@ -10,6 +10,7 @@ export class TictactoeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
