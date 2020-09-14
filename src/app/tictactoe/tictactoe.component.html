@@ -1,37 +1,81 @@
 <div>
-    <h2>Tic Tac Toe</h2>
-    
-    <!-- Tela de Ínicio -->
-    <div class="principal">
-      <a href="#" class="botao">Jogar</a>
-    </div>
-    <!-- fim tela inicial -->
-  
-    <!-- Tabuleiro -->
-    <div>
-      <ul>
-        <li class="kz-border-bottom kz-border-right"></li>
-        <li class="kz-border-bottom kz-border-right"></li>
-        <li class="kz-border-bottom"></li>
-        <li class="kz-border-bottom kz-border-right"></li>
-        <li class="kz-border-bottom kz-border-right"></li>
-        <li class="kz-border-bottom"></li>
-        <li class="kz-border-right"></li>
-        <li class="kz-border-right"></li>
-        <li></li>
-      </ul>
-    </div>
-  
-    <!-- Tela de Resultado -->
-    <div>
-      <span>
-      <p>Vitória!</p>
-      <p>Derrota...</p>
-      <p>Empate...</p>
-      <br />
-      <a href="#" class="botao">Jogar novamente</a>
-      </span>
-    </div>
-  
+  <h2>Tic Tac Toe</h2>
+
+  <!-- Tela de Ínicio -->
+  <div class="principal" *ngIf="showInicio">
+    <a href="#" class="botao" (click)="iniciarJogo()">Jogar</a>
   </div>
-  
+  <!-- fim tela inicial -->
+
+  <!-- Tabuleiro -->
+  <div *ngIf="showTabuleiro">
+    <ul>
+
+      <li class="kz-border-bottom kz-border-right" 
+        [class.kz-img-cruz]="exibirCruz(0, 0)"
+        [class.kz-img-circulo]="exibirCirculo(0, 0)" 
+        [class.kz-cor-vitoria]="exibirVitoria(0, 0)"
+        (click)="lancarJogada(0, 0)"></li>
+
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-cruz]="exibirCruz(0, 1)"
+        [class.kz-img-circulo]="exibirCirculo(0, 1)" 
+        [class.kz-cor-vitoria]="exibirVitoria(0, 1)"
+        (click)="lancarJogada(0, 1)"></li>
+
+      <li class="kz-border-bottom"
+        [class.kz-img-cruz]="exibirCruz(0, 2)"
+        [class.kz-img-circulo]="exibirCirculo(0, 2)" 
+        [class.kz-cor-vitoria]="exibirVitoria(0, 2)"
+        (click)="lancarJogada(0, 2)"></li>
+
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-cruz]="exibirCruz(1, 0)"
+        [class.kz-img-circulo]="exibirCirculo(1, 0)" 
+        [class.kz-cor-vitoria]="exibirVitoria(1, 0)"
+        (click)="lancarJogada(1, 0)"></li>
+
+      <li class="kz-border-bottom kz-border-right"
+        [class.kz-img-cruz]="exibirCruz(1, 1)"
+        [class.kz-img-circulo]="exibirCirculo(1, 1)" 
+        [class.kz-cor-vitoria]="exibirVitoria(1, 1)"
+        (click)="lancarJogada(1, 1)"></li>
+
+      <li class="kz-border-bottom"
+        [class.kz-img-cruz]="exibirCruz(1, 2)"
+        [class.kz-img-circulo]="exibirCirculo(1, 2)" 
+        [class.kz-cor-vitoria]="exibirVitoria(1, 2)"
+        (click)="lancarJogada(1, 2)"></li>
+
+      <li class="kz-border-right"
+        [class.kz-img-cruz]="exibirCruz(2, 0)"
+        [class.kz-img-circulo]="exibirCirculo(2, 0)" 
+        [class.kz-cor-vitoria]="exibirVitoria(2, 0)"
+        (click)="lancarJogada(2, 0)"></li>
+
+      <li class="kz-border-right"
+        [class.kz-img-cruz]="exibirCruz(2, 1)"
+        [class.kz-img-circulo]="exibirCirculo(2, 1)" 
+        [class.kz-cor-vitoria]="exibirVitoria(2, 1)"
+        (click)="lancarJogada(2, 1)"></li>
+
+      <li [class.kz-img-cruz]="exibirCruz(2, 2)"
+        [class.kz-img-circulo]="exibirCirculo(2, 2)" 
+        [class.kz-cor-vitoria]="exibirVitoria(2, 2)"
+        (click)="lancarJogada(2, 2)"></li>
+
+    </ul>
+  </div>
+
+  <!-- Tela de Resultado -->
+  <div *ngIf="showFim">
+    <span>
+      <p *ngIf="jogador==2">Vitória!</p>
+      <p *ngIf="jogador==1">Derrota...</p>
+      <p *ngIf="jogador==0">Empate...</p>
+      <br />
+      <a href="#" class="botao" (click)="novoJogo()">Jogar novamente</a>
+    </span>
+  </div>
+
+</div>

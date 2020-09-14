@@ -22,22 +22,22 @@ export class TictactoeService {
   constructor() { }
 
   iniciar(): void {
-
+    
     this._showInicio = true;
     this._showTabuleiro = false;
     this._showFim = false;
     this.numMovimentos = 0;
     this._jogador = this.CRUZ;
-    this.vitoria = false;
+    this.vitoria = false;    
     this.montarTabuleiro();
 
   }
 
-  montarTabuleiro(): void {
+  montarTabuleiro(): void {          
 
     this.tabuleiro = [this.TAM_TABULEIRO];
 
-    for (let i; i < this.TAM_TABULEIRO; i++) {
+    for (let i = 0; i < this.TAM_TABULEIRO; i++) {      
       this.tabuleiro[i] = [this.VAZIO, this.VAZIO, this.VAZIO];
     }
 
@@ -52,16 +52,16 @@ export class TictactoeService {
 
   lancarJogada(posX: number, posY: number): void {
 
-    if (this.tabuleiro[posX][posY] !== this.VAZIO || this.vitoria) {
+    if (this.tabuleiro[posX][posY] !== this.VAZIO || this.vitoria) {      
       return;
     }
 
     this.tabuleiro[posX][posY] = this._jogador;
     this.numMovimentos++;
     this.vitoria = this.fimJogo(posX, posY, this.tabuleiro, this._jogador);
-    this._jogador = (this._jogador === this.CRUZ) ? this.CIRCULO : this.CRUZ;
+    this._jogador = (this._jogador === this.CRUZ) ? this.CIRCULO : this.CRUZ;    
 
-    if (!this.vitoria && this.numMovimentos < 9) {
+    if (!this.vitoria && this.numMovimentos < 9) {    
       this.cpuJogada();
     }
 
@@ -76,13 +76,13 @@ export class TictactoeService {
     }
   }
 
-  cpuJogada() {
+  cpuJogada() {    
 
     let jogada: number[] = this.obterJogada(this.CIRCULO);
 
     if (jogada.length <= 0) {      
       // tenta evitar a derrota
-      jogada = this.obterJogada(this.CRUZ);
+      jogada = this.obterJogada(this.CRUZ);      
     }
 
     if (jogada.length <= 0) {
@@ -90,9 +90,9 @@ export class TictactoeService {
       // joga aleatório
       let jogadas: any = [];
 
-      for (let i=0; i<this.TAM_TABULEIRO; i++) {
+      for (let i = 0; i<this.TAM_TABULEIRO; i++) {
 
-        for (let j=0; j<this.TAM_TABULEIRO; j++) {
+        for (let j = 0; j<this.TAM_TABULEIRO; j++) {
 
           if (this.tabuleiro[i][j] === this.VAZIO) {
             jogadas.push([i, j]);
@@ -109,11 +109,11 @@ export class TictactoeService {
     this.tabuleiro[jogada[0]][jogada[1]] = this._jogador;
     this.numMovimentos++;
     this.vitoria = this.fimJogo(jogada[0], jogada[1], this.tabuleiro, this._jogador);
-    this._jogador = (this._jogador === this.CRUZ) ? this.CIRCULO : this.CIRCULO;    
+    this._jogador = (this._jogador === this.CRUZ) ? this.CIRCULO : this.CRUZ;    
     
   }
 
-  obterJogada(jogador: number): number[] {
+  obterJogada(jogador: number): number[] {  
 
     let tab = this.tabuleiro;
 
@@ -132,7 +132,6 @@ export class TictactoeService {
         }
 
         tab[lin][col] = this.VAZIO;
-
       }
     }
 
@@ -157,7 +156,7 @@ export class TictactoeService {
       tabuleiro[1][coluna] === jogador &&
       tabuleiro[2][coluna] === jogador) {
 
-      fim = [[coluna, 0], [coluna, 1], [coluna, 2]];
+      fim = [[0, coluna], [1, coluna], [2, coluna]];
     }
 
     //diagonais
@@ -180,6 +179,7 @@ export class TictactoeService {
   }
 
   exibirVitoria(posX: number, posY: number): boolean {
+
     let exibirVitoria: boolean = false;
 
     if (!this.vitoria) {
@@ -206,11 +206,11 @@ export class TictactoeService {
 
   }  
 
-  exibirX(posX: number, posY: number): boolean {
+  exibirCruz(posX: number, posY: number): boolean {
     return this.tabuleiro[posX][posY] === this.CRUZ;
   }
 
-  exibirO(posX: number, posY: number): boolean {
+  exibirCirculo(posX: number, posY: number): boolean {
     return this.tabuleiro[posX][posY] === this.CIRCULO;
   }  
 
